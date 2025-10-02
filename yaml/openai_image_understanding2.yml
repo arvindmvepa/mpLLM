@@ -1,0 +1,38 @@
+# save
+exp:
+  output_dir: openai_image_understanding
+openai:
+  api_key: placeholder
+# data params
+data:
+  data_dir: null
+  image_dir: null
+  prompt: 'Please produce a hundred questions (with one or more tasks) that a clinician may ask that the model does not have information to answer. The model can describe the volume, brain region, shape, and spread of {label} which is the region of interest. I will provide a few example question/answers that the model can solve. Please include {label} in the question but do not include anything else with curly braces. In the answer, please indicate the model cannot answer the question (potentially using different phrasings). Please generate the question starting with "Q:" and answer starting with "A:" and do not produce any additional text.'
+  questions: null
+  debug_num_samples: null
+  num_aug_samples: 1
+  aug_prompts:
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+# inference params
+inf:
+  model_name: gpt-4o-mini-2024-07-18
+  n: 10
+  min_tokens: null
+  max_tokens: 16384
+  temperature: 1.0
+  top_p: 1
+  save_file: mri_dataset_unknown.csv

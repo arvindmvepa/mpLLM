@@ -1,0 +1,39 @@
+# save
+exp:
+  output_dir: openai_image_understanding
+openai:
+  api_key: placeholder
+# data params
+data:
+  data_dir: null
+  image_dir: null
+  prompt: 'Please produce hundred alternative wordings that a clinician may use for the following question and answer. Please include everything surrounded by curly braces {} as they are because they are placeholders. Please generate the reworded question starting with "Q:" and reworded answer starting with "A:" and separate each generated question/answer pair with a newline. Please do not produce any additional text.'
+  questions: null
+  debug_num_samples: null
+  num_aug_samples: 1
+  aug_prompts:
+    - "Q: How large is the volume covered by {label}? A: The overall volume of {label} is {area}."
+    - "Q: Which region(s) of the brain is {label} located in? A: The {label} is located in {regions}."
+    - "Q: What is the shape of {label}? A: The shape of {label} is {shape}."
+    - "Q: How spread out is {label}? A: The spread of {label} is {satellite}."
+    - "Q: How large is the volume of {label} and where is it located? A: The overall volume of {label} is {area}, and it is located in {regions}."
+    - "Q: How large is the volume of {label} and what is its shape? A: The overall volume of {label} is {area}, and its shape is described as {shape}."
+    - "Q: How large is the volume of {label} and how spread out is it? A: The overall volume of {label} is {area}, and it is characterized as {satellite}."
+    - "Q: In which region is {label} and what is its shape? A: The {label} is located in {regions}, and its shape is described as {shape}."
+    - "Q: In which region is {label} and how spread out is it? A: The {label} is located in {regions}, and it is characterized as {satellite}."
+    - "Q: What is the shape of {label} and how spread out is it? A: The shape of {label} is described as {shape}, and it is characterized as {satellite}."
+    - "Q: What is the volume, region, and shape of {label}? A: The overall volume of {label} is {area}, it is located in {regions}, and its shape is described as {shape}."
+    - "Q: What is the volume, region, and spread of {label}? A: The overall volume of {label} is {area}, it is located in {regions}, and it is characterized as {satellite}."
+    - "Q: What is the volume, shape, and spread of {label}? A: The overall volume of {label} is {area}, its shape is described as {shape}, and it is characterized as {satellite}."
+    - "Q: What is the region, shape, and spread of {label}? A: The {label} is located in {regions}, its shape is described as {shape}, and it is characterized as {satellite}."
+    - "Q: What is the volume, region, shape, and spread of {label}? A: The overall volume of {label} is {area}, it is located in {regions}, its shape is described as {shape}, and it is characterized as {satellite}."
+
+# inference params
+inf:
+  model_name: gpt-4o-mini-2024-07-18
+  n: 20
+  min_tokens: null
+  max_tokens: 16384
+  temperature: 1.0
+  top_p: 1
+  save_file: mri_dataset.csv

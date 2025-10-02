@@ -1,0 +1,127 @@
+# exp params
+exp:
+  output_dir: our_model_goat
+# data params
+data:
+  train_dataset: brats_3d_vqa
+  inf_dataset: brats_3d_vqa
+  tokenizer_name: microsoft/Phi-3-mini-4k-instruct
+  base_dir: ""
+  img_dir: ""
+  inf_img_dir: ""
+  data_path: brats_goat_3d_vqa_subjTrue_train_updated_v3_seed0_multitask_fixed.json
+  inf_data_path: brats_goat_3d_vqa_subjTrue_val_updated_v3_seed0_multitask_fixed.json
+  image_size: [32, 256, 256]
+  included_modalities: ["t1c", "t1n", "t2f", "t2w"]
+  data_seed: 0
+  test_size: 0.2
+  img_tokens: 256
+  seq_length: 356
+  kg_embedder_params: null
+  prompt_type: "standard"
+  calculate_mae: False
+# train params
+train:
+  save_model_name: med_3d_phi3_instruct_mdl
+  model_name: null
+  vision_model_name: M3D/LaMed/pretrained_model/M3D-CLIP/pretrained_ViT.bin
+  vision_select_layer: -1
+  vision_select_feature: cls_patch
+  image_channel: 1
+  pooling_size: 2
+  patch_size: [4, 16, 16]
+  create_self_attn_block: False
+  num_attn_layers: 1
+  num_attn_heads: 12
+  add_attn_mlp: True
+  create_x_attn_block: False
+  num_x_attn_heads: 12
+  add_x_attn_mlp: True
+  x_attn_query: "text"
+  num_proj_layers: 1
+  create_moe_block: True
+  moe_use_router: True
+  moe_router_hidden_dim: 128
+  moe_num_proj: 4
+  moe_fusion_mode: "sum"
+  moe_use_shared_expert: True
+  moe_sum_weights: False
+  moe_use_lite_router: False
+  moe_router_reg_coeff: 0.0
+  moe_adapted_router: False
+  moe_w_text: True
+  moe_token_based_router: False
+  moe_token_and_seq_based_router: False
+  moe_token_and_seq_based_router_w_viz: False
+  moe_higher_level_router_num_blocks: 12
+  moe_higher_level_block_kwargs:
+    token_based_router: [False, False, False, False, False, False, True, True, True, True, True, True]
+    w_text_router: [False, False, False, False, False, False, False, False, False, False, False, False]
+  add_multitask: True
+  add_multitask_unknown: True
+  add_viz_w_add_multitask: False
+  multitask_wt: 1.0
+  multitask_text_ft_wt: 1.0
+  multitask_viz_ft_wt: 1.0
+  add_vqa_summary_token: False
+  add_multitask_first_eos: True
+  freeze_vision_model: True
+  freeze_llm_model: False
+  llm_model_name: microsoft/Phi-3-mini-4k-instruct
+  pretrained: False
+  load_projection_matrix: False
+  use_quantization: False
+  r: 16
+  lora_alpha: 32
+  target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+  lora_dropout: 0.1
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  label_names: null
+  per_device_train_batch_size: 1
+  per_device_eval_batch_size: 1
+  gradient_accumulation_steps: 8
+  num_train_epochs: 2
+  learning_rate: 2.0e-4
+  fp16: True
+  optim: adamw_torch_fused
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.05
+  save_total_limit: 4
+  logging_steps: 1
+  save_strategy: epoch
+  evaluation_strategy: epoch
+  eval_steps: null
+  save_steps: null
+  evaluate_start: False
+  gen_train_outputs: False
+  gen_llava_med_train_outputs: False
+  resume_from_checkpoint: False
+inf:
+  model_name: our_model_goat/med_3d_phi3_instruct_mdl
+  llm_model_name: microsoft/Phi-3-mini-4k-instruct
+  load_projection_matrix: False
+  use_quantization: False
+  r: 16
+  lora_alpha: 32
+  target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+  lora_dropout: 0.1
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  beg_prompt: ""
+  mid_prompt: ""
+  end_prompt: ""
+  context_prompt: ""
+  replace_prompt: null
+  max_new_tokens: 50
+  top_k: null
+  similarity_threshold: null
+  decoding_kwargs:
+    num_beams: 1
+    do_sample: False
+    temperature: 0.0
+  clean_mc: False
+  include_img: True
+  llm_only: False
+  save_file: vqa.json
+  results_file: val.json
