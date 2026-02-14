@@ -1,5 +1,12 @@
+--index-url https://download.pytorch.org/whl/cu121
+--extra-index-url https://pypi.org/simple
+
+numpy==1.26.4
+
 chardet==5.2.0
 charset-normalizer==2.1.0
+einops==0.6.1
+einops-exts==0.0.4
 fsspec==2024.2.0
 huggingface-hub==0.28.1
 mkl-service==2.4.0
@@ -8,14 +15,17 @@ regex==2023.12.25
 safetensors==0.4.2
 sentencepiece==0.1.99
 tokenizers==0.19.1
+pandas==2.3.3
+
 torch==2.2.0
 torchaudio==2.2.0
 torchvision==0.17.0
+
 tqdm==4.66.2
 transformers==4.44.2
 openai==1.30.4
 open_clip_torch==2.24.0
-safetensors==0.4.2
+peft==0.12.0
 pytest-mock==3.10.0
 pytest-pythonpath==0.7.4
 sentence_transformers==3.1.1

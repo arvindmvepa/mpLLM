@@ -1,10 +1,7 @@
-# A Multimodal LLM Approach for Visual Question Answering on Multiparametric 3D Brain MRI
+# Multimodal LLM with Hierarchical Mixture-of-Experts for VQA on 3D Brain MRI
 
-This is the official implementation for the paper "A Multimodal LLM Approach for Visual Question Answering on 
-Multiparametric 3D Brain MRI". In our work, we propose mpLLM, a novel multimodal LLM architecture that utilizes 
-hierarchical mixture-of-experts (MoE) to process multiple interrelated 3D image modalities. We also propose a novel a 
-synthetic VQA protocol that generates medically relevant visual question answering (VQA) data utilizing existing large, 
-publicly available segmentation mpMRI datasets.
+This is the official implementation for the paper "Multimodal LLM with Hierarchical Mixture-of-Experts for VQA on 3D Brain MRI". In our work, we propose mpLLM, a novel multimodal LLM architecture that utilizes 
+hierarchical mixture-of-experts (MoE) to process multiple interrelated 3D image modalities. We also propose a novel a synthetic VQA protocol that generates medically relevant visual question answering (VQA) data utilizing existing large, publicly available segmentation mpMRI datasets.
 
 <p align="center">
   <img src="./HierMoE.jpg" width="50%" />
@@ -12,7 +9,7 @@ publicly available segmentation mpMRI datasets.
 
 ## Usage
 1. Make sure `conda` or `virtualenv` is installed and create a virtual environment and install 
-the libraries in `requirements.txt`
+the libraries in `requirements.txt` (we tested with the latest version of python 3.9)
 ```
 pip install -r requirements.txt
 ```
@@ -47,14 +44,9 @@ following format
 ```
 More details about the dataset release are forthcoming.
 
-4. In our experiments, we use the image encoder from `https://github.com/BAAI-DCAI/M3D` and specify the location of
-the saved encoder in `vision_model_name` in the yaml file (the yaml files are described in more detail below).
+4. In our experiments, we use the image encoder from `https://github.com/BAAI-DCAI/M3D` and specify the location of the saved encoder in `vision_model_name` in the yaml file (the yaml files are described in more detail below).
 
-5. To train our model, we have three scripts corresponding to the three datasets: `run_med_3d_llm_brats.py`, 
-`run_med_3d_llm_brats_met.py`, and `run_med_3d_llm_brats_goat.py`. The eval scripts can be run with
-`run_med_3d_llm_brats_eval.py`, `run_med_3d_llm_brats_met_eval.py`, and
-`run_med_3d_llm_brats_goal_eval.py`. You may want to modify these scripts based on your provided data. Run the below 
-command to run the scripts. 
+5. To train our model, we have three scripts corresponding to the three datasets: `run_med_3d_llm_brats.py`,  `run_med_3d_llm_brats_met.py`, and `run_med_3d_llm_brats_goat.py`. We have also provided the token-level and modality-level moe versions of the model (without prompt-based routing) in `yaml/med_3d-llm_params_brats1.yml` and `yaml/med_3d-llm_params_brats2.yml` respectively for comparison. The eval scripts can be run with `run_med_3d_llm_brats_eval.py`, `run_med_3d_llm_brats_met_eval.py`, and `run_med_3d_llm_brats_goal_eval.py`. You may want to modify these scripts based on your provided data. Run the below command to run the scripts. 
 ```
 PYTHONPATH=. python run/<run_script>
 ```
@@ -73,8 +65,7 @@ Hierarchical MoE is contained in `model/moe_block.py` and `model/higher_level_mo
 would like to inspect the code.
 
 ## Evaluation Code
-The metric evaluation script is found in `data/llm_eval_multitask.py`. Please provide the multitask prediction 
-file, the ground truth file, and the output file.
+The metric evaluation script is found in `data/llm_eval_multitask.py`. Please provide the multitask prediction  file, the ground truth file, and the output file.
 
 ## Citation
 

@@ -1,6 +1,6 @@
-# our model with prompt-based routing on GLI dataset
+# token-level moe (without prompt-based routing)
 exp:
-  output_dir: our_model_gli
+  output_dir: our_model_token_level_moe_gli
 # data params
 data:
   train_dataset: brats_3d_vqa
@@ -98,7 +98,7 @@ train:
   gen_llava_med_train_outputs: False
   resume_from_checkpoint: False
 inf:
-  model_name: our_model_gli/med_3d_phi3_instruct_mdl
+  model_name: our_model_token_level_moe_gli/med_3d_phi3_instruct_mdl
   llm_model_name: microsoft/Phi-3-mini-4k-instruct
   load_projection_matrix: False
   use_quantization: False

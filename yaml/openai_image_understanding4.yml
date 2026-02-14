@@ -1,0 +1,33 @@
+# automated data cleaning for reworded standard questions with unknown tasks
+exp:
+  output_dir: openai_image_understanding
+openai:
+  api_key: placeholder
+# data params
+data:
+  data_dir: null
+  image_dir: null
+  prompt: | 
+    Determine whether the reworded question is a faithful, clinically appropriate rephrasing of the original question. The reworded question also has an additional query not in the original question. Please also determine whether the added query is a valid medical question. Please ignore {label} as this is a placeholder. Output VALID or INVALID with no additional text.
+    Example 1:
+    Original Q: Q: How large is the volume of {label} and what is its shape?
+    Reworded Q: Q: What is the mass and form of {label}, and engage in patient counseling?
+    INVALID
+    Example 2:
+    Original Q: Q: How large is the volume of {label} and what is its shape? 
+    Reworded Q: Q: Can you estimate the volume and layout of {label}, and administer a flu vaccine?
+    VALID
+  questions: null
+  reworded_questions: mri_dataset_partially_unknown.csv
+  debug_num_samples: null
+  num_aug_samples: null
+  aug_prompts: null
+# inference params
+inf:
+  model_name: gpt-4o-2024-08-06
+  n: 1
+  min_tokens: null
+  max_tokens: 20
+  temperature: 0.0
+  top_p: 1
+  save_file: mri_dataset_partially_unknown_clean.csv

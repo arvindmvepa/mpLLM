@@ -1,4 +1,4 @@
-# exp params
+# eval for our model on GLI dataset
 exp:
   output_dir: our_model_gli
 # data params
@@ -45,7 +45,7 @@ train:
   moe_num_proj: 4
   moe_fusion_mode: "sum"
   moe_use_shared_expert: True
-  moe_sum_weights: False
+  moe_sum_weights: True
   moe_use_lite_router: False
   moe_router_reg_coeff: 0.0
   moe_adapted_router: False

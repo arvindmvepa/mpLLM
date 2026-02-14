@@ -1,0 +1,24 @@
+# automated data cleaning for reworded standard questions
+exp:
+  output_dir: openai_image_understanding
+openai:
+  api_key: placeholder
+# data params
+data:
+  data_dir: null
+  image_dir: null
+  prompt: 'Determine whether the reworded question is a faithful, clinically appropriate rephrasing of the original question. Please ignore {valid} as this is a placeholder. Output VALID or INVALID with no additional text.'
+  questions: null
+  reworded_questions: mri_dataset.csv
+  debug_num_samples: null
+  num_aug_samples: null
+  aug_prompts: null
+# inference params
+inf:
+  model_name: gpt-4o-2024-08-06
+  n: 1
+  min_tokens: null
+  max_tokens: 20
+  temperature: 0.0
+  top_p: 1
+  save_file: mri_dataset_clean.csv
