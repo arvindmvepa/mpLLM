@@ -14,10 +14,11 @@ the libraries in `requirements.txt` (we tested with the latest version of python
 pip install -r requirements.txt
 ```
 2. Download the BraTS-GLI, BraTS-MET, and BraTS-GoAT from the official website and run 
-`prepare_brats_3d_dataset.py` to convert the data into npy format (make sure to change paths).
+`dataset/prepare_brats_3d_dataset.py` to convert the data into npy format (make sure to change paths).
 
-3. While we do not provide the VQA data at this time, you may provide a json file, in which there a list of dicts in the 
-following format
+3. In order to generate the VQA files, run `dataset/create_brats_3d_vqa_dataset.py` and `dataset/create_brats_3d_vqa_dataset_from_openai.py` in that order (make sure to change paths). 
+Prior to running `create_brats_3d_vqa_dataset_from_openai.py`, you will need to run `run/openai_image_understanding[1-3].py`
+which will generate the openai question candidates. After doing all of this, you will have VQA data in the following format
 ```
   {
     "question": (question text),
@@ -42,11 +43,10 @@ following format
     "answer_vqa_numeric": (list of numeric answers for area, region, shape, satellite, and unknown. Ff the question type is not provided, then 0 is provided. The numeric answer for region is also a list.)
   }
 ```
-More details about the dataset release are forthcoming.
 
 4. In our experiments, we use the image encoder from `https://github.com/BAAI-DCAI/M3D` and specify the location of the saved encoder in `vision_model_name` in the yaml file (the yaml files are described in more detail below).
 
-5. To train our model, we have three scripts corresponding to the three datasets: `run_med_3d_llm_brats.py`,  `run_med_3d_llm_brats_met.py`, and `run_med_3d_llm_brats_goat.py`. We have also provided the token-level and modality-level moe versions of the model (without prompt-based routing) in `yaml/med_3d-llm_params_brats1.yml` and `yaml/med_3d-llm_params_brats2.yml` respectively for comparison. The eval scripts can be run with `run_med_3d_llm_brats_eval.py`, `run_med_3d_llm_brats_met_eval.py`, and `run_med_3d_llm_brats_goal_eval.py`. You may want to modify these scripts based on your provided data. Run the below command to run the scripts. 
+5. To train our model, we have three scripts corresponding to the three datasets: `run/run_med_3d_llm_brats.py`,  `run/run_med_3d_llm_brats_met.py`, and `run/run_med_3d_llm_brats_goat.py`. We have also provided the token-level and modality-level moe versions of the model (without prompt-based routing) in `yaml/med_3d-llm_params_brats1.yml` and `yaml/med_3d-llm_params_brats2.yml` respectively for comparison. The eval scripts can be run with `run_med_3d_llm_brats_eval.py`, `run_med_3d_llm_brats_met_eval.py`, and `run_med_3d_llm_brats_goal_eval.py`. Make sure to modify these scripts based on your provided data. Run the below command to run the scripts. 
 ```
 PYTHONPATH=. python run/<run_script>
 ```
